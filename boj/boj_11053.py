@@ -16,11 +16,11 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-arr = list(map(int, input().split()))
+A = list(map(int, input().split()))
 
 dp = [1] * N  # 각 원소를 "마지막 원소로 가지는" 증가하는 부분 수열의 최대 길이를 담는 배열
 for i in range(1, N):
     for j in range(i):  # 기준값 앞에 위치하는 원소들을 순회하며 크기 비교
-        if arr[i] > arr[j]: 
+        if A[i] > A[j]: 
             dp[i] = max(dp[i], dp[j] + 1) # 기준값이 더 큰 경우 증가하는 부분 수열의 조건을 만족하므로 dp[j] + 1과 dp[i] 중 더 큰 값으로 갱신
 print(max(dp))  # 각 원소를 마지막으로 하는 증가하는 부분 수열의 최대 길이 중 최댓값 출력
