@@ -15,18 +15,15 @@ OOIOIOIOIIOII
 4
 '''
 
-pn = [''] * (N + 1)
-pn[1] = 'IOI'
-for i in range(2, N + 1):
-    pn[i] = pn[i - 1] + "OI"
-
+pn = 'IOI' + 'OI' * (N - 1)
 
 count = 0
 i = 0
-while True:
-    i = S.find(pn[N], i)
-    if i == -1:
-        break
-    count += 1
-    i += 1
+l = len(pn)
+while S[i:i+l]:
+    if pn == S[i:i+l]:
+        i += 2
+        count += 1
+    else:
+        i += 1
 print(count)
