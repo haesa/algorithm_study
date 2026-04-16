@@ -2,6 +2,7 @@ import sys
 
 input = sys.stdin.readline
 
+INF = float("inf")
 
 N, M = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
@@ -36,32 +37,25 @@ def dfs(r, c, size):
 
 
 def calc(r, c):
-    max_value = 0
+    value = board[r][c]
+    min_value = INF
+    count = 0
 
     for i in range(4):
-        value = board[r][c]
-
         nr, nc = r + d[i][0], c + d[i][1]
-        if not (0 <= nr < N and 0 <= nc < M):
-            continue
 
-        value += board[nr][nc]
-
-        # 분기
-        base_r, base_c = nr, nc
-        for di in [-1, 1]:
-            ni = (i + di + 4) % 4
-            nr = base_r + d[ni][0]
-            nc = base_c + d[ni][1]
-
-            if not (0 <= nr < N and 0 <= nc < M):
-                break
-
+        if 0 <= nr < N and 0 <= nc < M:
             value += board[nr][nc]
+            min_value = min(board[nr][nc], min_value)
+            count += 1
 
-        max_value = max(value, max_value)
+    if count == 3:
+        return value
 
-    return max_value
+    if count == 4:
+        return value - min_value
+
+    return 0
 
 
 result = 0
