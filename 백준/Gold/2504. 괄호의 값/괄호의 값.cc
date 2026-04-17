@@ -2,7 +2,7 @@
 using namespace std;
 string str;
 stack<char> st;
-int result, num = 1, valid = 1;
+int result, num = 1;
 
 int main() {
   ios::sync_with_stdio(0);
