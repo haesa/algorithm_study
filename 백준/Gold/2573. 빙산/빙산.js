@@ -7,7 +7,11 @@ const dx = [-1, 1, 0, 0];
 const dy = [0, 0, -1, 1];
 
 const map = [];
-for (let i = 0; i < n; i++) map.push(input.shift().split(' ').map(Number));
+const map2 = [];
+for (let i = 0; i < n; i++) {
+  map.push(input[i].split(' ').map(Number));
+  map2.push(input[i].split(' ').map(Number));
+}
 
 class Node {
   constructor(data, next = null) {
@@ -53,25 +57,23 @@ function isRange(x, y) {
 }
 
 function melt() {
-  const queue = new Queue();
-  for (let i = 1; i < n - 1; i++) {
+  for (let i = 1; i < n - 1; i++)
     for (let j = 1; j < m - 1; j++) {
       if (map[i][j] === 0) continue;
-      let h = map[i][j];
+      let height = map[i][j];
       for (let k = 0; k < 4; k++) {
         const nx = i + dx[k];
         const ny = j + dy[k];
-        if (map[nx][ny] === 0) h--;
+        if (map[nx][ny] === 0) height--;
       }
-      if (h > 0) queue.push([i, j, h]);
-      else queue.push([i, j, 0]);
+      map2[i][j] = height > 0 ? height : 0;
     }
-  }
 
-  for (let i = queue.front(); i !== null; i = i.next) {
-    const [x, y, h] = i.data;
-    map[x][y] = h;
-  }
+  for (let i = 1; i < n - 1; i++)
+    for (let j = 1; j < m - 1; j++) {
+      if (map[i][j] === 0) continue;
+      map[i][j] = map2[i][j];
+    }
 }
 
 function bfs(i, j, visit) {
