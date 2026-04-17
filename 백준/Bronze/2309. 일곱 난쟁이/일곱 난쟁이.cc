@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 int main()
 {
@@ -10,14 +11,7 @@ int main()
     total += n[i];
   }
 
-  for (int i = 0; i < 9; i++)
-    for (int j = i + 1; j < 9; j++)
-      if (n[i] > n[j])
-      {
-        int temp = n[i];
-        n[i] = n[j];
-        n[j] = temp;
-      }
+  sort(n, n + 9);
 
   int sub = total - 100;
   for (int i = 0; i < 9; i++)
