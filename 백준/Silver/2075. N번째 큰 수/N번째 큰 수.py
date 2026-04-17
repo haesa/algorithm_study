@@ -8,10 +8,10 @@ N = int(read())
 
 heap = []
 for _ in range(N):
-  for num in list(map(int, read().split())):
-    if len(heap) >= N:
-      heapq.heappushpop(heap, num)
-    else:
+  for num in map(int, read().split()):
+    if len(heap) < N:
       heapq.heappush(heap, num)
+    else:
+      heapq.heappushpop(heap, num)
 
-write(str(heapq.heappop(heap)))
+write(str(heap[0]))
