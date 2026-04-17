@@ -1,4 +1,9 @@
-const [n, ...input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(Number);
+const [n, ...input] = require('fs')
+  .readFileSync('/dev/stdin')
+  .toString()
+  .trim()
+  .split('\n')
+  .map(Number);
 
 const result = [];
 const stack = [];
@@ -12,5 +17,4 @@ for (let i = 1, j = 0; i <= n; i++) {
     j++;
   }
 }
-if (stack.length) console.log('NO');
-else console.log(...result);
+console.log(stack.length ? 'NO' : result.join(' '));
