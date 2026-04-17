@@ -12,14 +12,15 @@ for i in range(n - 1):
 
   while start <= end:
     mid = (start + end) // 2
+    sum = ph_list[i] + ph_list[mid]
     
-    if abs(ph_list[i] + ph_list[mid]) < min:
-      min = abs(ph_list[i] + ph_list[mid])
+    if abs(sum) < min:
+      min = abs(sum)
       result = [ph_list[i], ph_list[mid]]
         
-    if (ph_list[i] + ph_list[mid]) == 0:
+    if sum == 0:
       break
-    elif (ph_list[i] + ph_list[mid]) < 0:
+    elif sum < 0:
       start = mid + 1
     else:  
       end = mid - 1
