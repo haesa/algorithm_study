@@ -9,6 +9,7 @@ const sum = (str) => {
   return str.match(/[\d]/g)?.reduce((acc, cur) => acc + Number(cur), 0) || 0;
 };
 
+answer.sort();
 answer.sort((a, b) => {
   if (a.length !== b.length) {
     return a.length - b.length;
@@ -20,8 +21,6 @@ answer.sort((a, b) => {
   if (aSum !== bSum) {
     return aSum - bSum;
   }
-
-  return a.localeCompare(b);
 });
 
 console.log(answer.join('\n'));
