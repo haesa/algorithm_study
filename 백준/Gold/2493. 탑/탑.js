@@ -1,21 +1,15 @@
-let fs = require("fs");
-let input = fs.readFileSync("/dev/stdin").toString().trim().split('\n');
-let n  = Number(input.shift());
-let arr = input[0].split(' ').map(Number)
-let stack = []
-let ans = [];
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split('\n');
+
+const n = Number(input[0]);
+const tower = input[1].split(' ').map(Number);
+const stack = [];
+const result = [];
 
 for (let i = 0; i < n; i++) {
-    let now = arr[i]
-    while(stack.length && arr[stack.at(-1)] < now) {
-        stack.pop();
-    }
-    if (!stack.length) {
-        ans.push(0)
-    } else {
-        ans.push(stack.at(-1) + 1)
-    }
-    stack.push(i)
+  while (stack.length && tower[stack[stack.length - 1]] < tower[i]) stack.pop();
+  if (stack.length === 0) result.push(0);
+  else result.push(stack[stack.length - 1] + 1);
+  stack.push(i);
 }
-
-console.log(ans.join(' '))
+console.log(...result);
