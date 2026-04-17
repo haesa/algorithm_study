@@ -1,38 +1,31 @@
 const [nm, ...input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
-
 const [n, m] = nm.split(' ').map(Number);
 const maze = input.map((s) => s.trim().split('').map(Number));
+const dist = Array.from({length: n}, () => Array.from({length: m}, () => 0));
 
-const visit = new Array(n);
-for (let i = 0; i < n; i++) visit[i] = Array.from({ length: m }, () => 0);
+const dx = [0, 1, 0, -1];
+const dy = [1, 0, -1, 0];
 
-const dx = [0, 0, -1, 1];
-const dy = [1, -1, 0, 0];
-
-function isRange(x, y) {
-  return x >= 0 && x < n && y >= 0 && y < m;
-}
-
-function isVisit(x, y) {
-  return visit[x][y];
+function bfs() {
+    const queue = [[0, 0]];
+    dist[0][0] = 1;
+    while(queue.length > 0) {
+        const [x, y] = queue.shift();
+        for(let k = 0; k < 4; k++) {
+            const nx = x + dx[k];
+            const ny = y + dy[k];
+            if(nx < 0 || nx >= n || ny < 0 || ny >= m || maze[nx][ny] === 0 || dist[nx][ny] > 0) {
+                continue;
+            }
+            queue.push([nx, ny]);
+            dist[nx][ny] = dist[x][y] + 1;
+        }
+    }
 }
 
 function solution() {
-  const queue = [[0, 0, 1]];
-  while (queue.length) {
-    const cur = queue.shift();
-    const [x, y, d] = cur;
-    if (x + 1 === n && y + 1 === m) {
-      console.log(d);
-      break;
-    }
-    for (let k = 0; k < 4; k++) {
-      const nx = x + dx[k];
-      const ny = y + dy[k];
-      if (!isRange(nx, ny) || isVisit(nx, ny) || maze[nx][ny] === 0) continue;
-      visit[nx][ny] = 1;
-      queue.push([nx, ny, d + 1]);
-    }
-  }
+    bfs();
+    console.log(dist[n-1][m-1]);
 }
+
 solution();
