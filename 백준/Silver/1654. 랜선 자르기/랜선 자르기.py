@@ -20,5 +20,5 @@ def binary_search(value):
       end = mid - 1
   print(end)
 
-min_value = max(lan_list)
-binary_search(min_value)
+max_value = max(lan_list)
+binary_search(max_value)
