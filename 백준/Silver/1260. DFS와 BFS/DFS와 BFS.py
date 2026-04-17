@@ -1,59 +1,48 @@
-# 입력: N, M, V (정점의 개수, 간선의 개수, 시작 번호)
-# 로직: DFS, BFS 함수
-# 출력 : DFS, BFS 수행 결과를 한 줄씩 출력
-
 import sys
-input = sys.stdin.readline
+from collections import deque
 
-n, m, v = map(int, input().split())
+read = sys.stdin.readline
+write = sys.stdout.write
 
-# 행렬 만들기
-graph = [[0] * (n + 1) for _ in range(n + 1)]
-for i in range(m):
-    a, b = map(int, input().split())
-    graph[a][b] = graph[b][a] = 1
+N, M, V = map(int, read().split())
 
-# 방문 리스트
-visited_dfs = [0] * (n + 1)
-visited_bfs = [0] * (n + 1)
+graph = [[] for _ in range(N + 1)]
+for _ in range(M):
+    a, b = map(int, read().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-# dfs
+
 def dfs(v):
-  answer = []
-  stack = [v]
-  
-  while len(stack) > 0:
-    current = stack.pop()
+    visited = [0] * (N + 1)
+    stack = [v]
+    path = []
+    while stack:
+        cur = stack.pop()
+        if visited[cur]:
+            continue
+        visited[cur] = 1
+        path.append(cur)
+        for next in sorted(graph[cur], reverse=True):
+            stack.append(next)
+    write(' '.join(map(str, path)))
 
-    if visited_dfs[current] == 1:
-      continue
-        
-    visited_dfs[current] = 1
-    answer.append(current)
-    
-    for next in range(n, 0, -1):
-      if graph[current][next] == 1 and visited_dfs[next] == 0:
-        stack.append(next)
 
-  return answer
-
-# bfs
 def bfs(v):
-  answer = []
-  queue = [v]
-  visited_bfs[v] = 1
-  
-  while len(queue) > 0:
-    current = queue.pop(0)
-    answer.append(current)
-    
-    for next in range(0, n + 1):
-      if graph[current][next] == 1 and visited_bfs[next] == 0:
-        queue.append(next)
-        visited_bfs[next] = 1
+    visited = [0] * (N + 1)
+    q = deque([v])
+    path = []
+    while q:
+        cur = q.popleft()
+        if visited[cur]:
+            continue
+        visited[cur] = 1
+        path.append(cur)
+        for next in sorted(graph[cur]):
+            q.append(next)
+    write(' '.join(map(str, path)))
 
-  return answer
-  
-# dfs, bfs 결과 출력
-print(' '.join(map(str, dfs(v))))
-print(' '.join(map(str, bfs(v))))
+
+dfs(V)
+write('\n')
+bfs(V)
