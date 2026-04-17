@@ -9,7 +9,7 @@ const result = [];
 for (let i = 0; i < n; i++) {
   const curTower = tower[i];
   while (stack.length && tower[stack[stack.length - 1]] < curTower) stack.pop();
-  if (stack.length === 0) result.push(0);
+  if (!stack.length) result.push(0);
   else result.push(stack[stack.length - 1] + 1);
   stack.push(i);
 }
