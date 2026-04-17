@@ -1,20 +1,23 @@
 #include<stdio.h>
 
 int main() {
-	long long fibo[91] = { 0 };
+	long long f1 = 0, f2 = 1, fn;
 	int n;
-
-	fibo[0] = 0;
-	fibo[1] = 1;
 
 	do{
 		scanf("%d", &n);
 	} while (n > 90);
 
-	for (int i = 2; i <= n; i++)
-		fibo[i] = fibo[i - 1] + fibo[i - 2];
-	
-		printf("%lld\n", fibo[n]);
-
+    if(n < 2)
+        printf("%d\n", n);
+    else {
+	    for (int i = 2; i <= n; i++) {
+	    	fn = f1 + f2;
+	    	f1 = f2;
+	    	f2 = fn;
+	    }
+        printf("%lld\n", fn);
+    }
+		
 	return 0;
 }
