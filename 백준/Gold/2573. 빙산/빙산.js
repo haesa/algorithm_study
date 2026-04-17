@@ -67,7 +67,7 @@ function bfs(i, j, visit) {
         visit[nx][ny] = 1;
       }
     }
-    map2[x][y] < 0 && (map2[x][y] = 0);
+    if (map2[x][y] < 0) map2[x][y] = 0;
   }
 }
 
@@ -86,13 +86,14 @@ function solution() {
         count++;
       }
     if (count > 1) return year;
-    if (count === 0) return 0;
 
+    let melt = true;
     for (let i = 1; i < n - 1; i++)
       for (let j = 1; j < m - 1; j++) {
-        if (map[i][j] === 0) continue;
         map[i][j] = map2[i][j];
+        if (map[i][j] !== 0) melt = false;
       }
+    if (melt) return 0;
     year++;
   }
 }
