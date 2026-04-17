@@ -1,13 +1,8 @@
 from collections import deque
 
-def palindrome(number):
-  queue = deque(list(number))
-  while len(queue) > 1:
-    a = queue.popleft()
-    b = queue.pop()
-    if a != b:
-      return 'no'
-  return 'yes'  
+def palindrome(origin):
+  rev = ''.join(list(reversed(origin)))
+  return 'yes' if rev == origin else 'no'
 
 numbers = []
 
