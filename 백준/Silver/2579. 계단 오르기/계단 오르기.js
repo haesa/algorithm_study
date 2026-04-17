@@ -1,21 +1,18 @@
 const fs = require('fs');
-const [n, ...input] = fs
+const [n, ...scores] = fs
   .readFileSync('/dev/stdin')
   .toString()
   .trim()
   .split('\n')
   .map(Number);
-const answer = new Array(input).fill(0);
+const d = Array.from({length: n + 1}, () => 0);
 
-answer[0] = input[0];
-answer[1] = input[0] + input[1];
-answer[2] = Math.max(input[0] + input[2], input[1] + input[2]);
+d[1] = scores[0];
+d[2] = scores[0] + scores[1];
+d[3] = Math.max(scores[0] + scores[2], scores[1] + scores[2]);
 
-for (let i = 3; i < n; i++) {
-  answer[i] = Math.max(
-    input[i] + input[i - 1] + answer[i - 3],
-    input[i] + answer[i - 2]
-  );
+for(let i = 4; i <= n; i++) {
+    d[i] = Math.max(scores[i - 1] + scores[i - 2] + d[i - 3], scores[i - 1] + d[i - 2]);
 }
 
-console.log(answer[n - 1]);
+console.log(d[n]);
