@@ -1,17 +1,6 @@
 const fs = require('fs');
 const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
-
 const [n, m] = input.shift().split(' ').map(Number);
-
-const dx = [-1, 1, 0, 0];
-const dy = [0, 0, -1, 1];
-
-const map = [];
-const map2 = [];
-for (let i = 0; i < n; i++) {
-  map.push(input[i].split(' ').map(Number));
-  map2.push(input[i].split(' ').map(Number));
-}
 
 class Node {
   constructor(data, next = null) {
@@ -43,40 +32,26 @@ class Queue {
     return node.data;
   }
 
-  front() {
-    return this.head.next;
-  }
-
   getSize() {
     return this.size;
   }
+}
+
+const map = [];
+const map2 = [];
+for (let i = 0; i < n; i++) {
+  map.push(input[i].split(' ').map(Number));
+  map2.push(input[i].split(' ').map(Number));
 }
 
 function isRange(x, y) {
   return x >= 0 && x < n && y >= 0 && y < m;
 }
 
-function melt() {
-  for (let i = 1; i < n - 1; i++)
-    for (let j = 1; j < m - 1; j++) {
-      if (map[i][j] === 0) continue;
-      let height = map[i][j];
-      for (let k = 0; k < 4; k++) {
-        const nx = i + dx[k];
-        const ny = j + dy[k];
-        if (map[nx][ny] === 0) height--;
-      }
-      map2[i][j] = height > 0 ? height : 0;
-    }
-
-  for (let i = 1; i < n - 1; i++)
-    for (let j = 1; j < m - 1; j++) {
-      if (map[i][j] === 0) continue;
-      map[i][j] = map2[i][j];
-    }
-}
-
 function bfs(i, j, visit) {
+  const dx = [-1, 1, 0, 0];
+  const dy = [0, 0, -1, 1];
+
   const queue = new Queue();
   queue.push([i, j]);
   visit[i][j] = 1;
@@ -85,10 +60,14 @@ function bfs(i, j, visit) {
     for (let k = 0; k < 4; k++) {
       const nx = x + dx[k];
       const ny = y + dy[k];
-      if (!isRange(nx, ny) || map[nx][ny] === 0 || visit[nx][ny]) continue;
-      queue.push([nx, ny]);
-      visit[nx][ny] = 1;
+      if (!isRange(nx, ny) || visit[nx][ny]) continue;
+      if (map[nx][ny] === 0) map2[x][y]--;
+      else {
+        queue.push([nx, ny]);
+        visit[nx][ny] = 1;
+      }
     }
+    map2[x][y] < 0 && (map2[x][y] = 0);
   }
 }
 
@@ -98,7 +77,7 @@ function solution() {
 
   while (true) {
     let count = 0;
-    for (let a = 0; a < n; a++) visit[a] = Array.from({ length: m }, () => 0);
+    for (let i = 0; i < n; i++) visit[i] = Array.from({ length: m }, () => 0);
 
     for (let i = 1; i < n - 1; i++)
       for (let j = 1; j < m - 1; j++) {
@@ -109,7 +88,11 @@ function solution() {
     if (count > 1) return year;
     if (count === 0) return 0;
 
-    melt();
+    for (let i = 1; i < n - 1; i++)
+      for (let j = 1; j < m - 1; j++) {
+        if (map[i][j] === 0) continue;
+        map[i][j] = map2[i][j];
+      }
     year++;
   }
 }
