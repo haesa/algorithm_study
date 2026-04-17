@@ -1,0 +1,6 @@
+const fs = require('fs');
+const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n').map(Number);
+
+const avg = input.reduce((acc, cur) => acc + cur) / input.length;
+const median = input.sort((a, b) => a - b)[2];
+console.log(`${avg} ${median}`);
