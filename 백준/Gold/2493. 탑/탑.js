@@ -1,8 +1,8 @@
 let fs = require("fs");
 let input = fs.readFileSync("/dev/stdin").toString().trim().split('\n');
 
-let n = Number(input[0]);
-let tower = input[1].split(' ').map(Number);
+let n = Number(input.shift());
+let tower = input[0].split(' ').map(Number);
 let stack = [];
 let result = [];
 
