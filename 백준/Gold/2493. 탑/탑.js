@@ -13,4 +13,4 @@ for (let i = 0; i < n; i++) {
   else result.push(stack.at(-1) + 1);
   stack.push(i);
 }
-console.log(result.join(' '));
+console.log(...result);
