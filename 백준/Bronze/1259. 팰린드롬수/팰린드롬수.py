@@ -1,5 +1,3 @@
-from collections import deque
-
 def palindrome(origin):
   rev = ''.join(list(reversed(origin)))
   return 'yes' if rev == origin else 'no'
