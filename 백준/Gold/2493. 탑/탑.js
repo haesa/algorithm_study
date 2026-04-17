@@ -2,12 +2,13 @@ const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('
 
 const n = Number(input[0]);
 const tower = input[1].split(' ').map(Number);
-const stack = [[100000001, 0]];
+const stack = [];
 const result = [];
 
 for (let i = 0; i < n; i++) {
-  while (stack[stack.length - 1][0] < tower[i]) stack.pop();
-  result.push(stack[stack.length - 1][1]);
-  stack.push([tower[i], i + 1]);
+  while (stack.length && tower[stack.at(-1)] < tower[i]) stack.pop();
+  if (stack.length === 0) result.push(0);
+  else result.push(stack.at(-1) + 1);
+  stack.push(i);
 }
 console.log(...result);
