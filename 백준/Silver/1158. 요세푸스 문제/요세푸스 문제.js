@@ -8,6 +8,7 @@ for (let i = 1; i <= n; i++) arr.push(i);
 let pos = 0;
 while (arr.length) {
   pos = (pos + k - 1) % arr.length;
-  result.push(arr.splice(pos, 1));
+  result.push(arr[pos]);
+  arr.splice(pos, 1);
 }
 console.log('<' + result.join(', ') + '>');
