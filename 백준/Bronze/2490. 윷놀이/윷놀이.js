@@ -1,16 +1,12 @@
-const input = require('fs')
-  .readFileSync('/dev/stdin')
-  .toString()
-  .trim()
-  .split('\n');
+const fs = require('fs');
+const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
-const count2Result = { 0: 'D', 1: 'C', 2: 'B', 3: 'A', 4: 'E' };
+const result = { 0: 'D', 1: 'C', 2: 'B', 3: 'A', 4: 'E' };
 
 input.forEach((line) => {
   const count = line
     .split(' ')
     .map(Number)
     .reduce((acc, cur) => acc + cur, 0);
-
-  console.log(count2Result[count]);
+  console.log(result[count]);
 });
