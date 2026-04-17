@@ -1,25 +1,27 @@
 const fs = require('fs');
-const stdin = fs.readFileSync('/dev/stdin').toString().split('\n');
-const input = (() => {
-  let line = 0;
-  return () => stdin[line++];
-})();
+const [n, ...input] = fs
+  .readFileSync('/dev/stdin')
+  .toString()
+  .trim()
+  .split('\n');
 
-let N = +input();
-let arr = [];
+const sum = (str) => {
+  return str.match(/[\d]/g)?.reduce((acc, cur) => acc + Number(cur), 0) || 0;
+};
 
-while (N--) arr.push(input());
+input.sort((a, b) => {
+  if (a.length !== b.length) {
+    return a.length - b.length;
+  }
 
-arr.sort((a, b) => {
-  if (a.length != b.length) return a.length - b.length;
-  let sum1 = sum(a),
-    sum2 = sum(b);
-  if (sum1 == sum2) return a.localeCompare(b);
-  return sum1 - sum2;
+  const aSum = sum(a);
+  const bSum = sum(b);
+
+  if (aSum !== bSum) {
+    return aSum - bSum;
+  }
+
+  return a.localeCompare(b);
 });
 
-console.log(arr.join('\n'));
-
-function sum(str) {
-  return str.match(/[\d]/g)?.reduce((sum, cur) => sum + +cur, 0) || 0;
-}
+console.log(input.join('\n'));
