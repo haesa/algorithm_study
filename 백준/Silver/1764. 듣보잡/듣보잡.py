@@ -1,17 +1,15 @@
-nm = input()
-n,m = map(int, nm.split(' '))
-
+n, m = [int(x) for x in input().split(' ')]
 a = set()
-for i in range(n): 
+b = set()
+
+for i in range(n):
   a.add(input())
 
-b = set()
 for i in range(m):
   b.add(input())
 
-result = list(a & b)
+s = a & b
+result = list(s)
 result.sort()
-    
 print(len(result))
-for c in result:
-  print(c)
+print('\n'.join(result))
