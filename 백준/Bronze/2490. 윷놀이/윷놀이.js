@@ -1,27 +1,16 @@
-const fs = require('fs');
-const inputs = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+const input = require('fs')
+  .readFileSync('/dev/stdin')
+  .toString()
+  .trim()
+  .split('\n');
 
-let answer = [];
-for (const input of inputs) {
-  let stick = 0;
-  const arr = input.split(' ').map(Number);
-  arr.forEach((a) => (stick += a));
-  switch (stick) {
-    case 0:
-      answer.push('D');
-      break;
-    case 1:
-      answer.push('C');
-      break;
-    case 2:
-      answer.push('B');
-      break;
-    case 3:
-      answer.push('A');
-      break;
-    case 4:
-      answer.push('E');
-  }
-}
+const count2Result = { 0: 'D', 1: 'C', 2: 'B', 3: 'A', 4: 'E' };
 
-console.log(answer.join('\n'));
+input.forEach((line) => {
+  const count = line
+    .split(' ')
+    .map(Number)
+    .reduce((acc, cur) => acc + cur, 0);
+
+  console.log(count2Result[count]);
+});
