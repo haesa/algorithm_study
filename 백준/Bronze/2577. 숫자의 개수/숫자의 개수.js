@@ -4,6 +4,6 @@ const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n').map(Nu
 const num = input.reduce((acc, cur) => acc * cur).toString();
 const result = new Array(10).fill(0);
 
-for (const i in num) result[num[i]]++;
+for (const i of num) result[i]++;
 
 console.log(...result);
