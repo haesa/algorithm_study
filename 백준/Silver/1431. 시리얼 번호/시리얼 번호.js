@@ -4,12 +4,12 @@ const [n, ...input] = fs
   .toString()
   .trim()
   .split('\n');
-
+const answer = input.map((v) => v.trim());
 const sum = (str) => {
   return str.match(/[\d]/g)?.reduce((acc, cur) => acc + Number(cur), 0) || 0;
 };
 
-input.sort((a, b) => {
+answer.sort((a, b) => {
   if (a.length !== b.length) {
     return a.length - b.length;
   }
@@ -24,4 +24,4 @@ input.sort((a, b) => {
   return a.localeCompare(b);
 });
 
-console.log(input.join('\n'));
+console.log(answer.join('\n'));
