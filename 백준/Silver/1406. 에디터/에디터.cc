@@ -30,7 +30,7 @@ int main() {
       case 'B':
         if (t == l.begin()) continue;
         if (t == l.end()) {
-          t = l.erase(--t);
+          l.erase(--t);
           t = l.end();
         } else
           t = l.erase(--t);
