@@ -10,8 +10,6 @@ q = deque(range(1, N + 1))
 
 while len(q) > 1:
   q.popleft()
-  if len(q) > 1:
-    top = q.popleft()
-    q.append(top)
+  q.append(q.popleft())
     
 write(str(q[0]))
