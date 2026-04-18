@@ -1,19 +1,11 @@
 def include369(number_str):
-  return any(sub in number_str for sub in ['3', '6', '9'])
-
-def count369(number_str):
-  count = 0
-  for char in number_str:
-    count += (1 if include369(char) else 0)
-  return count
+  return number_str == '3' or number_str == '6' or number_str == '9'
 
 result = 0
 n = int(input())
-
-for i in range(n):
-  number = i + 1
-  number_str = str(number)
-  if include369(number_str):
-    result += count369(number_str)
-    
+for i in range(1, n + 1):
+  for c in str(i):
+    if include369(c):
+      result += 1
+      
 print(result)
