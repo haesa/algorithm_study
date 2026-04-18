@@ -4,11 +4,13 @@ using namespace std;
 void parse(string& arr, deque<int>& dq) {
   int num = 0;
   for (int i = 1; i + 1 < arr.size(); i++) {
-    if (arr[i] == ',') {
+    if (arr[i] == ']') break;
+    if (arr[i] >= '0' && arr[i] <= '9')
+      num = num * 10 + (arr[i] - '0');
+    else {
       dq.push_back(num);
       num = 0;
-    } else
-      num = num * 10 + (arr[i] - '0');
+    }
   }
   if (num != 0) dq.push_back(num);
 }
