@@ -1,12 +1,11 @@
 const fs = require('fs');
 const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
-const n = input[0];
+const n = Number(input[0]);
 input.splice(0, 1);
-const operand = input.map((x) => x.split(' ').map(Number));
 
 let answer = '';
 for (let i = 0; i < n; i++) {
-  const [a, b] = operand[i];
+  const [a, b] = input[i].split(' ').map(Number);
   answer += `${a + b} `;
 }
 console.log(answer);
