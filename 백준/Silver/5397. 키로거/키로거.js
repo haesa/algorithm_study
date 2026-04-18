@@ -10,10 +10,10 @@ for (let i = 1; i <= n; i++) {
   for (const c of inputStr) {
     switch (c) {
       case '<':
-        leftStack.length && rightStack.push(leftStack.pop());
+        if(leftStack.length) rightStack.push(leftStack.pop());
         break;
       case '>':
-        rightStack.length && leftStack.push(rightStack.pop());
+        if(rightStack.length) leftStack.push(rightStack.pop());
         break;
       case '-':
         leftStack.pop();
