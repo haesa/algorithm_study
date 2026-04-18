@@ -1,9 +1,4 @@
 import sys
-input = sys.stdin.readline
-
-n, m = map(int, input().split(' '))
-dots = list(map(int, input().split(' ')))
-dots.sort()
 
 def binary_search_lower_bound(dots, target):
   start, end = 0, len(dots) - 1
@@ -34,6 +29,21 @@ def binary_search_uppder_bound(dots, target):
 
   return end
 
-for _ in range(m):
-  left, right = map(int, input().split())
-  print(binary_search_uppder_bound(dots, right) - binary_search_lower_bound(dots, left) + 1)
+n, m = map(int, sys.stdin.readline().split(' '))
+
+dots = list(map(int, sys.stdin.readline().split(' ')))
+lines = [list(map(int, sys.stdin.readline().split(' '))) for _ in range(m)]
+dots.sort()
+
+result = []
+for line in lines:
+  start, end = 0, len(dots) - 1
+  
+  if line[0] >= dots[0]:
+    start = binary_search_lower_bound(dots, line[0])
+  if line[-1] <= dots[-1]:
+    end = binary_search_uppder_bound(dots, line[-1])
+  result.append(end - start + 1)
+
+for num in result:
+  print(num)
