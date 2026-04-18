@@ -6,12 +6,21 @@ const n = Number(input[0]);
 for (let i = 1; i <= n; i++) {
   const leftStack = [];
   const rightStack = [];
-
-  for (const c of input[i]) {
-      if(c === '<') leftStack.length && rightStack.push(leftStack.pop());
-      else if(c === '>') rightStack.length && leftStack.push(rightStack.pop());
-      else if(c === '-') leftStack.pop();
-      else leftStack.push(c);
+  const inputStr = input[i];
+  for (const c of inputStr) {
+    switch (c) {
+      case '<':
+        leftStack.length && rightStack.push(leftStack.pop());
+        break;
+      case '>':
+        rightStack.length && leftStack.push(rightStack.pop());
+        break;
+      case '-':
+        leftStack.pop();
+        break;
+      default:
+        leftStack.push(c);
+    }
   }
   console.log(leftStack.join('') + rightStack.reverse().join(''));
 }
