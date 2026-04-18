@@ -2,10 +2,10 @@ const fs = require('fs');
 const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
 const n = Number(input[0]);
-let leftStack = [];
-let rightStack = [];
 
 for (let i = 1; i <= n; i++) {
+  const leftStack = [];
+  const rightStack = [];
   const pw = input[i];
   for (let j = 0; j < pw.length; j++) {
     const c = pw[j];
@@ -24,6 +24,4 @@ for (let i = 1; i <= n; i++) {
     }
   }
   console.log(leftStack.join('') + rightStack.reverse().join(''));
-  leftStack = [];
-  rightStack = [];
 }
