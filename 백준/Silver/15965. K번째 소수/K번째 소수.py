@@ -1,13 +1,14 @@
 MAX = 7400000
 k = int(input())
+prime = [True] * MAX
+prime[0] = prime[1] = False
 
-numbers = [1 for _ in range(MAX)]
-result = []
-
+count = 0
 for i in range(2, MAX):
-  if(numbers[i] == 1):
-    result.append(i)
+  if prime[i]:
+    count += 1
+    if count == k:
+      print(i)
+      break
     for j in range(i + i, MAX, i):
-      numbers[j] = 0
-
-print(result[k - 1])
+      prime[j] = False
