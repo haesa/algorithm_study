@@ -9,7 +9,7 @@ order = sorted(prize.items(), key = lambda x : (-x[1][0], -x[1][1], -x[1][2]))
 
 rank = [0] * (n + 1)
 score = order[0][1]
-rank_num = 0
+rank_num = 1
 for index, (code, medals) in enumerate(order):
   if medals != score:
     rank_num = index + 1
