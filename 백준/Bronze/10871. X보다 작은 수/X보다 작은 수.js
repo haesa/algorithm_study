@@ -1,8 +1,6 @@
 const fs = require('fs');
-const inputs = fs.readFileSync('/dev/stdin').toString().split('\n');
+const input = fs.readFileSync('/dev/stdin').toString().split('\n');
 
-const x = Number(inputs[0].split(' ')[1]);
-const arr = inputs[1].split(' ').map(Number);
-const answer = arr.filter((num) => num < x);
-
-console.log(answer.join(' '));
+const [n, x] = input[0].split(' ').map((num) => +num);
+const [...arr] = input[1].split(' ').map((num) => +num);
+arr.forEach((num) => num < x && console.log(num));
