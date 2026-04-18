@@ -5,7 +5,7 @@ input.splice(0, 1);
 
 let answer = '';
 for (let i = 0; i < n; i++) {
-  const [a, b] = input[i].split(' ').map(Number);
-  answer += `${a + b} `;
+  const [a, b] = input[i].split(' ');
+  answer += `${Number(a) + Number(b)} `;
 }
 console.log(answer);
