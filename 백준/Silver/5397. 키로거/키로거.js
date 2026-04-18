@@ -8,19 +8,10 @@ for (let i = 1; i <= n; i++) {
   const rightStack = [];
 
   for (const c of input[i]) {
-    switch (c) {
-      case '<':
-        leftStack.length && rightStack.push(leftStack.pop());
-        break;
-      case '>':
-        rightStack.length && leftStack.push(rightStack.pop());
-        break;
-      case '-':
-        leftStack.pop();
-        break;
-      default:
-        leftStack.push(c);
-    }
+      if(c === '<') leftStack.length && rightStack.push(leftStack.pop());
+      else if(c === '>') rightStack.length && leftStack.push(rightStack.pop());
+      else if(c === '-') leftStack.pop();
+      else leftStack.push(c);
   }
   console.log(leftStack.join('') + rightStack.reverse().join(''));
 }
