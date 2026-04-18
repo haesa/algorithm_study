@@ -6,4 +6,4 @@ for (let i = 0; i < k; i++) {
   if (input[i] === 0) money.pop();
   else money.push(input[i]);
 }
-console.log(money.length ? money.reduce((acc, cur) => acc + cur) : 0);
+console.log(money.reduce((acc, cur) => acc + cur, 0));
