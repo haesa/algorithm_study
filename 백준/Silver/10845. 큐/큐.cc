@@ -6,6 +6,9 @@ int n, k;
 int main() {
   cin >> n;
   for (int i = 0; i < n; i++) {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     cin >> cmd;
     if (cmd == "push") {
       cin >> k;
