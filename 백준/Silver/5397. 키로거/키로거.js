@@ -1,17 +1,19 @@
 const fs = require('fs');
-const [n, ...str] = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
-for (const s of str) {
+const n = Number(input[0]);
+
+for (let i = 1; i <= n; i++) {
   const leftStack = [];
   const rightStack = [];
 
-  for (const c of s) {
+  for (const c of input[i]) {
     switch (c) {
       case '<':
-        leftStack.length > 0 && rightStack.push(leftStack.pop());
+        leftStack.length && rightStack.push(leftStack.pop());
         break;
       case '>':
-        rightStack.length > 0 && leftStack.push(rightStack.pop());
+        rightStack.length && leftStack.push(rightStack.pop());
         break;
       case '-':
         leftStack.pop();
