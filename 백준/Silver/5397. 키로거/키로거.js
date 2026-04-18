@@ -2,12 +2,15 @@ const fs = require('fs');
 const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
 const n = Number(input[0]);
+let leftStack;
+let rightStack;
 
 for (let i = 1; i <= n; i++) {
-  const leftStack = [];
-  const rightStack = [];
-  const inputStr = input[i];
-  for (const c of inputStr) {
+  const pw = input[i];
+  leftStack = [];
+  rightStack = [];
+    
+  for (const c of pw) {
     switch (c) {
       case '<':
         if(leftStack.length) rightStack.push(leftStack.pop());
