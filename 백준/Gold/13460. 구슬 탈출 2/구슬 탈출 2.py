@@ -37,6 +37,11 @@ def bfs(red_sr, red_sc, blue_sr, blue_sc):
             red_nr, red_nc, red_dist = roll(red_r, red_c, dr, dc)
             blue_nr, blue_nc, blue_dist = roll(blue_r, blue_c, dr, dc)
 
+            if (
+                board[red_nr][red_nc] == "O" and board[blue_nr][blue_nc] == "O"
+            ):  # 동시에 빠지는 경우
+                continue
+
             if board[blue_nr][blue_nc] == "O":  # 파란 구슬이 빠지는 경우
                 continue
 
