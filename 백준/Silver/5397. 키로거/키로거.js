@@ -1,28 +1,17 @@
 const fs = require('fs');
-const [n, ...str] = fs
-  .readFileSync('/dev/stdin')
-  .toString()
-  .trim()
-  .split('\n');
-
-let leftStack;
-let rightStack;
-
-const moveLeft = () => leftStack.length > 0 && rightStack.push(leftStack.pop());
-const moveRight = () =>
-  rightStack.length > 0 && leftStack.push(rightStack.pop());
+const [n, ...str] = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
 for (const s of str) {
-  leftStack = [];
-  rightStack = [];
+  const leftStack = [];
+  const rightStack = [];
 
   for (const c of s) {
     switch (c) {
       case '<':
-        moveLeft();
+        leftStack.length > 0 && rightStack.push(leftStack.pop());
         break;
       case '>':
-        moveRight();
+        rightStack.length > 0 && leftStack.push(rightStack.pop());
         break;
       case '-':
         leftStack.pop();
