@@ -6,10 +6,10 @@ INF = float("inf")
 
 N, M = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
+MAX = max(map(max, board))
 
 """
 DFS 탐색(백트래킹)으로 4칸을 이동하여 테트로미노 도형 방문 체크
-'ㅗ' 테트로미노는 날개 4개를 더하고 가장 작은 값을 빼서 계산
 """
 
 # 상 우 하 좌
@@ -22,6 +22,9 @@ result = 0
 
 def dfs(r, c, size, total):
     global result
+
+    if total + (4 - size) * MAX < result:
+        return
 
     if size == 4:
         result = max(total, result)
