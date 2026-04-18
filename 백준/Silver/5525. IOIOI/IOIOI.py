@@ -5,28 +5,25 @@ N = int(read())
 M = int(read())
 S = read()
 
-'''
-1: IOI
-2: IOIOI
-3: IOIOIOI
-4: IOIOIOIOI
-5: IOIOIOIOIOI
-6: IOIOIOIOIOIOI
-7: IOIOIOIOIOIOIOI
+'''input
+1
+13
+OOIOIOIOIIOII
 '''
 
-result = 0
-pattern_count = 0
+'''output
+4
+'''
+
+pn = 'IOI' + 'OI' * (N - 1)
+
+count = 0
 i = 0
-while i < M - 2:
-    if S[i] == 'I' and S[i + 1] == 'O' and S[i + 2] == 'I':
-        pattern_count += 1
-        if pattern_count == N:
-            result += 1
-            pattern_count -= 1
+l = len(pn)
+while S[i:i+l]:
+    if pn == S[i:i+l]:
         i += 2
+        count += 1
     else:
-        pattern_count = 0
         i += 1
-
-print(result)
+print(count)
