@@ -7,8 +7,8 @@ let rightStack = [];
 
 for (let i = 1; i <= n; i++) {
   const pw = input[i];
-
-  for (const c of pw) {
+  for (let j = 0; j < pw.length; j++) {
+    const c = pw[j];
     switch (c) {
       case '<':
         leftStack.length && rightStack.push(leftStack.pop());
