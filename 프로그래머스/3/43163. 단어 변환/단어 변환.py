@@ -23,3 +23,4 @@ def solution(begin, target, words):
             if not visited[cur][i] and same_count == len(cur_word) - 1:
                 q.append((i, step + 1))
                 visited[cur][i] = 1
+                visited[i][cur] = 1
