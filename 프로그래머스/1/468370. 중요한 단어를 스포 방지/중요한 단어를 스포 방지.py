@@ -33,6 +33,7 @@ def solution(message, spoiler_ranges):
         
         prev_end = end
 
+    # 스포일러 구간 뒤에 message가 남은 경우 처리
     for word in message[prev_end:len(message)].rstrip().split():
         if word not in non_spoiler_words:
             non_spoiler_words.append(word)
