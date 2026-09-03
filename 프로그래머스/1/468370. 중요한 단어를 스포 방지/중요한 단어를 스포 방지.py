@@ -7,29 +7,27 @@ def solution(message, spoiler_ranges):
     spoiler = set()
     normal = set()
     
-    ws = 1 if message[0] == ' ' else 0
+    n = len(message)
+    m = len(spoiler_ranges)
+    ws = 0
     i = 0
     
-    while ws < len(message):
+    while ws < n:
         # [ws, we) 형태로 단어 찾기
         we = ws + 1
-        
-        while we < len(message) and message[we] != ' ':
-            we += 1
+        we = message.find(' ', ws)
+        we = n if message.find(' ', ws) == -1 else we
         word = message[ws:we]
         
         # 현재 단어보다 앞에 있는 스포 구간 제거
-        while i < len(spoiler_ranges) and spoiler_ranges[i][1] < ws:
+        while i < m and spoiler_ranges[i][1] < ws:
             i += 1
-            
-        if i < len(spoiler_ranges):
-            # 단어 구간 [ws, we)
-            # 스포 구간 [ss, se]
-            ss, se = spoiler_ranges[i]
-            if se >= ws and we > ss: # 스포일러 구간 겹치는 경우
-                spoiler.add(word)
-            else:
-                normal.add(word)
+        
+        # 스포일러 구간 겹치는 경우
+        # 단어 구간 [ws, we)
+        # 스포 구간 [ss, se]
+        if i < m and we > spoiler_ranges[i][0]:     
+            spoiler.add(word)
         else:
             normal.add(word)
         
