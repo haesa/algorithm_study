@@ -8,25 +8,23 @@
 '''
 
 def solution(s):
-    # 양 끝 이중 중괄호 제거 {{, }}
-    string = s[2:-2]
+    # 문자열 파싱
+    s1 = s[2:-2].split('},{')
     
-    # 중간 중괄호 제거 및 배열 매핑
-    arr_list = string.split('},{')
-    
-    # 배열로 매핑 & 원소 개수 오름차순 정렬
-    arr_list = list(map(lambda x: x.split(','), arr_list))
-    arr_list.sort(key=lambda x: len(x))
+    # 배열 매핑 & int 형변환
+    tuple_set_list = []
+    for s in s1:
+        tuple_set_list.append(list(map(int, s.split(','))))
+        
+    # 원소 개수 올림차순 정렬
+    tuple_set_list.sort(key=lambda x: len(x))
     
     answer = []
     
-    for arr in arr_list:
-        for element in arr:
-            element_int = int(element) # 형변환 (string -> number)
-            if element_int in answer:
-                continue
-            else:
-                answer.append(element_int)
+    for tuple_set in tuple_set_list:
+        for element in tuple_set:
+            if element not in answer:
+                answer.append(element)
     
     return answer
 
