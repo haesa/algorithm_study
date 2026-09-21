@@ -6,41 +6,30 @@
 6. 배열 개수 반환
 '''
 
-import math
-import re
-
 def solution(n, k):
+    answer = 0
     # 진법 변환 (타입: 문자열)
     value = convert_base(n, k)
     
     # 0이 연속되는 구간 기준으로 나누기
-    value_list = re.split(r'0+', value)
-    
-    # 맨 오른쪽 끝에 0이 있는지 확인 후 전처리
-    if value_list[-1] == '':
-        value_list = value_list[:-2]
-    
-    # 소수만 남기기
-    prime_list = [x for x in list(map(int, value_list)) if is_prime(x)]
-    
-    return len(prime_list)
+    for x in value.split('0'):
+        if x == '':
+            continue
+        if is_prime(int(x)):
+            answer += 1
+    return answer
 
 def convert_base(value, base):    
     result = ''
-    
-    while value >= base:
-        value, remainder = divmod(value, base)
-        result += str(remainder)
-        
-    result += str(value)
+    while value:
+        result += str(value % base)
+        value //= base
     return result[::-1]
 
 def is_prime(value):
-    if value < 2:
-        return False
-    
-    for k in range(2, math.isqrt(value) + 1):
-        if value % k == 0:
-            return False
-    
+    if value < 2: return False
+    k = 2
+    while k * k <= value:
+        if value % k == 0: return False
+        k += 1
     return True
