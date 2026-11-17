@@ -5,7 +5,7 @@ for test_case in range(1, T + 1):
     A = list(map(int, input().split()))
     B = list(map(int, input().split()))
     
-    result = 0
+    result = float('-inf')
     if (N < M):
         for j in range(M - N + 1):
             temp = 0
