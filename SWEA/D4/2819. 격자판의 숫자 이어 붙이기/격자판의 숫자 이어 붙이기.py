@@ -2,7 +2,7 @@
 dr = [-1, 1, 0, 0]
 dc = [0, 0, -1, 1]
 
-def dfs(r, c, number, board, s):
+def dfs(r, c, number):
     if r < 0 or r >= 4 or c < 0 or c >= 4:
         return
 
@@ -14,7 +14,7 @@ def dfs(r, c, number, board, s):
     for i in range(4):
         nr = r + dr[i]
         nc =  c + dc[i]
-        dfs(nr, nc, number, board, s)
+        dfs(nr, nc, number)
 
 T = int(input())
 
@@ -24,6 +24,6 @@ for test_case in range(1, T + 1):
     s = set()
     for i in range(4):
         for j in range(4):
-            dfs(i, j, '', board, s)
+            dfs(i, j, '')
 
     print(f'#{test_case} {len(s)}')
