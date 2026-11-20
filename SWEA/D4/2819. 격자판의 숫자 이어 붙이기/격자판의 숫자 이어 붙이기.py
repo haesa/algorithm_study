@@ -2,28 +2,27 @@
 dr = [-1, 1, 0, 0]
 dc = [0, 0, -1, 1]
 
-def dfs(r, c, number):
-    if r < 0 or r >= 4 or c < 0 or c >= 4:
-        return
+def dfs(r, c, number, depth):
+    number = number * 10 + board[r][c]
 
-    number += str(board[r][c])
-    if len(number) == 7:
-        s.add(number)
+    if depth == 6:
+        numbers.add(number)
         return
 
     for i in range(4):
         nr = r + dr[i]
         nc =  c + dc[i]
-        dfs(nr, nc, number)
+        if 0 <= nr < 4 and 0 <= nc < 4:
+            dfs(nr, nc, number, depth + 1)
 
 T = int(input())
 
 for test_case in range(1, T + 1):
     board = [list(map(int, input().split())) for _ in range(4)]
 
-    s = set()
+    numbers = set()
     for i in range(4):
         for j in range(4):
-            dfs(i, j, '')
+            dfs(i, j,0, 0)
 
-    print(f'#{test_case} {len(s)}')
+    print(f'#{test_case} {len(numbers)}')
