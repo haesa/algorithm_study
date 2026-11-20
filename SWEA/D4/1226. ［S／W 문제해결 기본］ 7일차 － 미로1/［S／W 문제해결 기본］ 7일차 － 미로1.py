@@ -6,8 +6,7 @@ dy = [1, -1, 0, 0]
 
 def bfs(start_x, start_y, maze):
     q = deque([(start_x, start_y)])
-    visited = [[False] * 16 for _ in range(16)]
-    visited[start_y][start_x] = True
+    maze[start_y][start_x] = 1
 
     while q:
         cur_x, cur_y = q.popleft()
@@ -16,12 +15,15 @@ def bfs(start_x, start_y, maze):
             next_x = cur_x + dx[i]
             next_y = cur_y + dy[i]
 
+            if next_x < 0 or next_x >= 16 or next_y < 0 or next_y >= 16:
+                continue
+
             if maze[next_y][next_x] == 3:
                 return 1
 
-            if 0 <= next_x < 16 and 0 <= next_y < 16 and maze[next_y][next_x] == 0 and not visited[next_y][next_x]:
+            if maze[next_y][next_x] == 0:
                 q.append((next_x, next_y))
-                visited[next_y][next_x] = True
+                maze[next_y][next_x] = 1
 
     return 0
 
@@ -32,10 +34,9 @@ for test_case in range(1, 11):
 
     start_x, start_y = 0, 0
     for i in range(16):
-        for j in range(16):
-            if maze[i][j] == 2:
-                start_y = i
-                start_x = j
-                break
+        if 2 in maze[i]:
+            start_y = i
+            start_x = maze[i].index(2)
+            break
 
     print(f'#{test_case} {bfs(start_x, start_y, maze)}')
